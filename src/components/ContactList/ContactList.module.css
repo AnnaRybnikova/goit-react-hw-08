@@ -1,0 +1,16 @@
+.contact_list {
+    display: flex;
+    flex-direction: row;
+
+    align-items: baseline;
+    justify-content: space-between;
+
+    flex-wrap: wrap;
+}
+
+.contact_list_item {
+    border: solid 1px black;
+    border-radius: 4px;
+    
+    width: calc((97%/4));
+}
