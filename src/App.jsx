@@ -1,8 +1,10 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import ContactForm from "./components/ContactForm/ContactForm.jsx"
 import SearchBox from "./components/SearchBox/SearchBox.jsx"
 import ContactList from "./components/ContactList/ContactList.jsx"
 import './App.css'
+
+const CONTACTS_LOCAL_ID = "contacts";
 
 function App() {
   const initialContacts = [
@@ -12,8 +14,14 @@ function App() {
     { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
   ]
 
-  const [contacts, setContacts] = useState(initialContacts);
+  const [contacts, setContacts] = useState(() =>
+    JSON.parse(window.localStorage.getItem(CONTACTS_LOCAL_ID))
+    ?? initialContacts);
   const [searchValue, setSearchValue] = useState('');
+
+  useEffect(() => {
+    window.localStorage.setItem(CONTACTS_LOCAL_ID, JSON.stringify(contacts));
+  }, [contacts])
 
   const addContact = (newContact) => {
     setContacts((prev) => [...prev, newContact])
