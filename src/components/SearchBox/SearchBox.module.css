@@ -1,0 +1,18 @@
+.search_section {
+    margin-bottom: 16px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.search_label {
+}
+
+.search_input {
+    border: solid 1px var(--grey);
+    border-radius: 4px;
+
+    width: 220px;
+    height: 24px;
+}
+
