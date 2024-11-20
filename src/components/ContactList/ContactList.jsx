@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import s from "./ContactList.module.css"
 
 const ContactList = ({ contacts }) => {
-    console.log('contacts:' + contacts);
   return (
     <ul className={s.contact_list}>
           {contacts.map(contact => {
