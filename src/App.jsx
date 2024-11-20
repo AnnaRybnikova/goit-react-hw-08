@@ -15,13 +15,18 @@ function App() {
   const [contacts, setContacts] = useState(initialContacts);
   const [searchValue, setSearchValue] = useState('');
 
-  const visibleContacts = contacts.filter(contact => contact.name.toLowerCase().includes(searchValue.toLowerCase()));
+  const addContact = (newContact) => {
+    setContacts((prev) => [...prev, newContact])
+  }
+
+  const visibleContacts = contacts.filter(contact =>
+    contact.name.toLowerCase().includes(searchValue.toLowerCase()));
 
   return (
     <>
       <div>
         <h1>Phonebook</h1>
-        {/* <ContactForm /> */}
+        <ContactForm onAdd={addContact} />
         <SearchBox searchWord={ searchValue } onSearch={setSearchValue}/>
         <ContactList contacts={ visibleContacts } />
       </div>
