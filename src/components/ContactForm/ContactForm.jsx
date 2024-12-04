@@ -1,9 +1,10 @@
-import PropTypes from "prop-types";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { nanoid } from 'nanoid';
 import { useId } from "react";
 import s from "./ContactForm.module.css";
+import { useDispatch } from "react-redux";
+import { addContact } from "../../redux/contactsSlice";
 
 const FeedbackSchema = Yup.object().shape({
     name: Yup.string().min(3, "Too Short!").max(50, "Too Long!").required("Required"),
@@ -15,17 +16,19 @@ const initialValues = {
     number: '',
 }
 
-const ContactForm = ({ onAdd }) => {
+const ContactForm = () => {
+    const dispatch = useDispatch();
+
     const nameFieldId = useId();
     const numberFieldId = useId();
 
-    const handleSubmit = (values, actions) => {
-        onAdd({
+    const handleSubmit = (values) => {
+        const newContact = {
             id: nanoid(),
             name: values.name,
             number: values.number
-        });
-		actions.resetForm();
+        };
+		dispatch(addContact(newContact));
 	};
     
     return (
@@ -47,10 +50,6 @@ const ContactForm = ({ onAdd }) => {
             </Form>
         </Formik>
   )
-}
-
-ContactForm.propTypes = {
-    onAdd: PropTypes.func.isRequired,
 }
 
 export default ContactForm

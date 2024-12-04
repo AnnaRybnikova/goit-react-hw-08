@@ -12,15 +12,15 @@ const slice = createSlice({
             state.items.push(action.payload);
         },
         deleteContact: (state, action) => {
-            state.items.filter(item => item.id !== action.payload);
+            state.items = state.items.filter(item => item.id !== action.payload);
         }
     }
 });
 
 // selectors
-export const selectContacts = state => state.items;
+export const selectContacts = state => state.contacts.items;
 
-//actions
+// actions
 export const { addContact, deleteContact } = slice.actions;
 
 export const contactsReducer = slice.reducer;
